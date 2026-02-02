@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Olivia 💘</title>
+  <title>Liv 💘</title>
 
   <style>
     body {
@@ -12,45 +12,59 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: pink;
+      background: linear-gradient(to bottom, #ffd6e8, #ff9bbd);
       font-family: Arial, sans-serif;
+      overflow: hidden;
       text-align: center;
     }
 
-    .box {
+    .card {
       background: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+      padding: 50px;
+      border-radius: 25px;
+      box-shadow: 0px 10px 25px rgba(0,0,0,0.25);
+      width: 90%;
       max-width: 500px;
     }
 
     h1 {
       font-size: 2.5rem;
       margin-bottom: 15px;
+      color: #ff2f7a;
+    }
+
+    p {
+      font-size: 1.3rem;
     }
 
     button {
       font-size: 1.2rem;
       padding: 12px 25px;
-      margin: 10px;
+      margin: 15px;
       border: none;
-      border-radius: 12px;
+      border-radius: 15px;
       cursor: pointer;
+      font-weight: bold;
     }
 
-    #yes {
+    #nextBtn {
       background: hotpink;
       color: white;
     }
 
-    #no {
+    #yesBtn {
+      background: #ff2f7a;
+      color: white;
+    }
+
+    #noBtn {
       background: lightgray;
+      position: absolute;
     }
 
     #message {
       margin-top: 25px;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: bold;
       color: red;
     }
@@ -58,28 +72,61 @@
 </head>
 
 <body>
-  <div class="box">
-    <h1>Olivia 💖</h1>
+
+  <!-- ✅ PAGE 1 -->
+  <div class="card" id="page1">
+    <h1>Hi Liv 💖</h1>
+    <p>I made something special for you…</p>
+    <button id="nextBtn">Next →</button>
+  </div>
+
+  <!-- ✅ PAGE 2 -->
+  <div class="card" id="page2" style="display:none;">
+    <h1>Liv… 💘</h1>
     <p>Will you be my Valentine?</p>
 
-    <button id="yes">Yes 💘</button>
-    <button id="no">No 😢</button>
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 😢</button>
 
     <div id="message"></div>
   </div>
 
   <script>
-    const yesBtn = document.getElementById("yes");
-    const noBtn = document.getElementById("no");
+    // Pages
+    const page1 = document.getElementById("page1");
+    const page2 = document.getElementById("page2");
+
+    // Buttons
+    const nextBtn = document.getElementById("nextBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+
     const message = document.getElementById("message");
 
-    yesBtn.onclick = function () {
-      message.innerHTML = "YAY OLIVIA!! 💖💖 Happy Valentine’s Day!!";
+    // ✅ Move to page 2
+    nextBtn.onclick = function () {
+      page1.style.display = "none";
+      page2.style.display = "block";
+      moveNoButton(); // start the no button in a good spot
     };
 
-    noBtn.onclick = function () {
-      message.innerHTML = "Wrong answer 😭 Try again!";
+    // ✅ YES clicked
+    yesBtn.onclick = function () {
+      message.innerHTML = "YAY LIV!! 💖💖 Happy Valentine’s Day 😘";
+      noBtn.style.display = "none";
     };
+
+    // ✅ No button runs away
+    function moveNoButton() {
+      const x = Math.random() * (window.innerWidth - 150);
+      const y = Math.random() * (window.innerHeight - 100);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    noBtn.addEventListener("mouseenter", moveNoButton);
   </script>
+
 </body>
 </html>
